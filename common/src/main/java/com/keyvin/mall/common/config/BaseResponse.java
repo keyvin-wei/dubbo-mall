@@ -1,13 +1,18 @@
 package com.keyvin.mall.common.config;
 
+import java.io.Serializable;
+
 /**
  * @author weiwh
  * @date 2019/10/21 11:19
  */
-public class BaseResponse<T> {
+public class BaseResponse<T> implements Serializable {
     private Integer code;
     private String msg;
     private T data;
+
+    public BaseResponse() {
+    }
 
     public BaseResponse(Integer code, String msg, T data) {
         this.code = code;

@@ -2,8 +2,8 @@ package com.keyvin.mall.server.service.impl;
 
 import com.keyvin.mall.api.dto.DemoDTO;
 import com.keyvin.mall.api.service.RpcDemoService;
-import com.keyvin.mall.model.entity.User;
-import com.keyvin.mall.server.service.dubbo.UserService;
+import com.keyvin.mall.api.service.UserService;
+import com.keyvin.mall.common.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

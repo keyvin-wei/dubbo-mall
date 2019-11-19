@@ -1,6 +1,6 @@
-package com.keyvin.mall.server.service.dubbo;
+package com.keyvin.mall.api.service;
 
-import com.keyvin.mall.model.entity.User;
+import com.keyvin.mall.common.entity.User;
 
 /**
  * @author weiwh

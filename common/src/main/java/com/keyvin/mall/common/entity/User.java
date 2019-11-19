@@ -1,4 +1,4 @@
-package com.keyvin.mall.model.entity;
+package com.keyvin.mall.common.entity;
 
 /**
  * @author weiwh

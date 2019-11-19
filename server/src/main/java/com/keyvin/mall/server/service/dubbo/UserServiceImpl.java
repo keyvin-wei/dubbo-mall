@@ -1,7 +1,8 @@
 package com.keyvin.mall.server.service.dubbo;
 
+import com.keyvin.mall.api.service.UserService;
+import com.keyvin.mall.common.entity.User;
 import com.keyvin.mall.model.dao.UserDao;
-import com.keyvin.mall.model.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

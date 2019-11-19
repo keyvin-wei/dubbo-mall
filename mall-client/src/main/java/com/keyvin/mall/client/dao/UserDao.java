@@ -1,4 +1,4 @@
-package com.keyvin.mall.model.dao;
+package com.keyvin.mall.client.dao;
 
 import com.keyvin.mall.common.entity.User;
 

@@ -1,4 +1,4 @@
-package com.keyvin.mall.server;
+package com.keyvin.mall.client;
 
 import com.alibaba.dubbo.config.spring.context.annotation.DubboComponentScan;
 import org.mybatis.spring.annotation.MapperScan;
@@ -7,17 +7,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
 
-/**
- * @author weiwh
- * @date 2019/10/13 12:13
- */
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.keyvin.mall"})
-@MapperScan("com.keyvin.mall.model.dao")
-@DubboComponentScan(basePackages = "com.keyvin.mall.server.service.impl")
+@MapperScan("com.keyvin.mall.client.dao")
 @ImportResource("classpath:spring-dubbo.xml")
-public class MallApplication {
+@DubboComponentScan(basePackages = "com.keyvin.mall.client.service")
+public class MallClientApplication {
+
     public static void main(String[] args) {
-        SpringApplication.run(MallApplication.class, args);
+        SpringApplication.run(MallClientApplication.class, args);
     }
+
 }
