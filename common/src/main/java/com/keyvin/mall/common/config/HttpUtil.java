@@ -31,14 +31,9 @@ public class HttpUtil {
         Request request;
         if (headerMap!=null && headerMap.keySet()!=null && headerMap.keySet().size()>0){
             Headers headers=Headers.of(headerMap);
-            request=builder.get()
-                    .url(url)
-                    .headers(headers)
-                    .build();
+            request=builder.get().url(url).headers(headers).build();
         }else{
-            request=builder.get()
-                    .url(url)
-                    .build();
+            request=builder.get().url(url).build();
         }
         return request;
     }
@@ -47,12 +42,9 @@ public class HttpUtil {
         Request.Builder builder;
         if (headerMap != null && headerMap.keySet() != null && headerMap.keySet().size() > 0) {
             Headers headers = Headers.of(headerMap);
-            builder = new Request.Builder()
-                    .url(url)
-                    .headers(headers);
+            builder = new Request.Builder().url(url).headers(headers);
         } else {
-            builder = new Request.Builder()
-                    .url(url);
+            builder = new Request.Builder().url(url);
         }
         return builder;
     }
@@ -170,7 +162,7 @@ public class HttpUtil {
             String key;
             Iterator<String> iterator = params.keySet().iterator();
             while (iterator.hasNext()) {
-                key = iterator.next().toString();
+                key = iterator.next();
                 formBuilder.add(key, params.get(key));
             }
         }
