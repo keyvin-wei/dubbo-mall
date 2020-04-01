@@ -26,6 +26,10 @@ public class QiniuUploader {
     private static final String accessKey = "66camnhN3G5RxddSRHrYZyRMij4sKetw8gT9wiFR";
     private static final String secretKey = "d25vxvza4RsuErkELfttytGCQFsiuuILKZXC8p3I";
     private static final String bucket = "keyvin20200331";
+    private static final String bucketPrivate = "private002";
+    private static final String domainUrlPrivate = "http://q846pihho.bkt.clouddn.com";
+
+
     private static Configuration cfg = new Configuration(Region.huanan());
     private static Auth auth = Auth.create(accessKey, secretKey);
     private static UploadManager uploadManager = new UploadManager(cfg);
@@ -47,6 +51,20 @@ public class QiniuUploader {
         long expireSeconds = 3600;
         String upToken = auth1.uploadToken(bucket, null, expireSeconds, putPolicy);
         System.out.println("自定义这个返回的JSON token为"+upToken);
+        return upToken;
+    }
+
+    /**'
+     * 获取私有上传token信息
+     * @return
+     */
+    public static String getTokenPrivate(){
+        Auth auth1 = Auth.create(accessKey, secretKey);
+        StringMap putPolicy = new StringMap();
+        putPolicy.put("returnBody", "{\"key\":\"$(key)\",\"hash\":\"$(etag)\",\"bucket\":\"$(bucket)\",\"fsize\":$(fsize)}");
+        long expireSeconds = 3600;
+        String upToken = auth1.uploadToken(bucketPrivate, null, expireSeconds, putPolicy);
+        System.out.println("自定义这个返回的JSON private token为"+upToken);
         return upToken;
     }
 
@@ -121,11 +139,40 @@ public class QiniuUploader {
         return null;
     }
 
+    public static boolean uploadprivate(){
+        try {
+            String filePath = "D:\\douyin\\H.png";
+            Response response = uploadManager.put(filePath, "H.png", getTokenPrivate());
+            //解析上传成功的结果
+            DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
+            System.out.println(putRet.key);
+            System.out.println(putRet.hash);
+        } catch (QiniuException ex) {
+            Response r = ex.response;
+            System.err.println(r.toString());
+            try {
+                System.err.println(r.bodyString());
+            } catch (QiniuException ex2) {
+                ex2.printStackTrace();
+            }
+        }
+        return true;
+    }
+
+    public static String genCredentials(String key){
+        String url = domainUrlPrivate+"/"+key;
+        return com.keyvin.mall.qiniu.Auth.create(accessKey, secretKey).privateDownloadUrl(url, 10);
+    }
+
 
     public static void main(String[] args) {
         // upload();
         // uploadResume();
-        getFileInfo();
+        // getFileInfo();
+        // uploadprivate();
+        System.out.println(genCredentials("H.png"));
+        System.out.println(genCredentials("private-demo.mp4"));
+
     }
 
 }
